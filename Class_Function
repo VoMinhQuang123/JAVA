@@ -1,0 +1,140 @@
+import java.sql.SQLOutput;
+import java.util.Scanner;
+
+public class Function {
+
+    private static final List_Student listStudent = new List_Student();
+    public static void addStudent(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the number of students you want to add:");
+
+        String numberOfStudents = sc.nextLine();
+        if (checkError.isInteger(numberOfStudents))
+        {
+            int numberOfStudentsChecked = Integer.parseInt(numberOfStudents);
+            for (int i = 0; i < numberOfStudentsChecked; i++) {
+                String id;
+                while (true){
+                System.out.print("Enter ID Student: "); id = sc.nextLine();
+                if(id.isEmpty()){
+                    System.out.println("Please do not leave ID blank");
+                }
+                else if (listStudent.checkID(id)) {
+                    System.out.println("ID already exists");
+                }
+                else {break;}}
+                //
+                String name;
+                while (true) {
+                    System.out.print("Enter Student's Name: ");
+                    name = sc.nextLine();
+                    if(name.isEmpty()){
+                        System.out.println("Please do not leave Name blank");
+                    }
+                    else if (!checkError.isValidName(name)) {
+                        System.out.println("Please enter the correct name format as letters!");
+                    } else {break;}}
+                //
+                int age;
+                while (true) {
+                    System.out.print("Enter Student's Age: "); String ageInput = sc.nextLine();
+                    try {
+                        if(ageInput.isEmpty()){
+                            System.out.println("Please do not leave Age blank");
+                        }
+                        age = Integer.parseInt(ageInput);
+                        if (checkError.checkAge(age)) {
+                            break;
+                        } else {
+                            System.out.println("Enter Age as an integer greater than 0!");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input. Please enter a valid age.");
+                    }
+                }
+                //
+                int gender;
+                while (true){
+                    System.out.print("Enter Gender's Student Male(1)/Female(0)):"); String genderInput = sc.nextLine();
+                    try {
+                    if (genderInput.isEmpty()){
+                            System.out.println("Please do not leave gender blank");
+                    }
+                    gender = Integer.parseInt(genderInput);
+                    if (checkError.checkGender(gender)){break;}
+                    else { System.out.println("Enter Male is 1 and Female là 0");}}
+                    catch (NumberFormatException e) {
+                        System.out.println("Invalid input. Please enter a valid gender.");
+                }
+                }
+                //
+                System.out.print("Enter Address's Student: "); String address = sc.nextLine();
+                if(address.isEmpty()){
+                    System.out.println("Please do not leave Address blank");
+                }
+                else {break;}
+                //
+                float point;
+                while (true){
+                System.out.print("Enter Point's Student: ");
+                    String pointInput = sc.nextLine();
+                    try {
+                        point = Float.parseFloat(pointInput);
+                        if(point>=0 && point <=10){
+                            break;
+                        }
+                        else {System.out.println("Invalid input. Please enter score on a 10-point scale!");}
+
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input. Please enter a valid point.");
+                    }
+                }
+                Student student = new Student(id, name, age,gender,address, point);
+                listStudent.addNewStudent(student);
+                System.out.println("Add Successfully!");
+                sc.nextLine();
+            }
+        }
+    }
+    public static void printStudent(){
+        System.out.println("Student list:");
+        listStudent.printListStudent();
+    }
+    public static void removeStudent(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter ID Student: "); String iD = sc.nextLine();
+        Student student = new Student(iD);
+        if (listStudent.deleteStudent(student)) {
+            System.out.println("Remove Successfully!");
+        } else {
+            System.out.println("Student ID not found.");
+        }
+    }
+    public static void searchStudentName(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Name's Student: "); String name = sc.nextLine();
+        if (!listStudent.searchStudentByName(name)) {
+            System.out.println("Not found");
+        }
+    }
+    public static void searchStudentId(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter ID Student: "); String id = sc.nextLine();
+        if (!listStudent.searchStudentByID(id)) {
+            System.out.println("Not found");
+        }
+    }
+    public static void searchStudentScore(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Score's Student: "); Float point = sc.nextFloat();
+        if (!listStudent.searchStudentByPoint(point)) {
+            System.out.println("Not found");
+        }
+    }
+    public static void scoreHighToLow(){
+        listStudent.sortStudentsByScoreHighToLow();
+    }
+    public static void scoreLowToHigh(){
+        listStudent.sortStudentsByScoreLowToHigh();
+    }
+}
