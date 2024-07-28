@@ -1,0 +1,100 @@
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.ArrayList;
+
+public class List_Student {
+    private final List<Student> listStudent;
+    public List_Student() {
+        this.listStudent = new ArrayList<>();
+    }
+    public List_Student(List<Student> listStudent) {
+        this.listStudent = new ArrayList<>(listStudent);
+    }
+    public void addNewStudent(Student student) {
+        this.listStudent.add(student);
+    }
+    public void printListStudent(){
+        for(Student student : listStudent) {
+            System.out.println(student);
+        }
+    }
+    public boolean deleteStudent(Student student){
+        return this.listStudent.remove((student));
+    }
+    public boolean searchStudentByID(String id) {
+        for (Student student : listStudent) {
+            if (student.getId().equals(id)) {
+                System.out.println(student);
+                return true; //
+            }
+        }
+        return false;
+    }
+    public boolean searchStudentByName(String name) {
+        for (Student student : listStudent) {
+            if (student.getName().indexOf(name) >= 0) {
+                System.out.println(student);
+                return true;
+            }
+        }
+        return false; // Trả về true nếu tìm thấy ít nhất một sinh viên, false nếu không tìm thấy
+    }
+    public boolean searchStudentByPoint(Float point) {
+        for (Student student : listStudent) {
+            if (student.getPoint().equals(point)) {
+                System.out.println(student);
+                return true;
+            }
+        }
+        return false; // Trả về true nếu tìm thấy ít nhất một sinh viên, false nếu không tìm thấy
+    }
+    public void sortStudentsByScoreHighToLow(){
+        List<Student> sortedList = new ArrayList<>(listStudent);
+        Collections.sort(sortedList, new Comparator<Student>() {
+            @Override
+            public int compare(Student student1, Student student2) {
+                if(student1.getPoint()>student2.getPoint()){
+                    return -1;
+                }
+                if(student1.getPoint()<student2.getPoint()){
+                    return 1;
+                }
+                else {
+                    return 0;
+                }
+            }
+        });
+        for(Student student : sortedList) {
+            System.out.println(student);
+        }
+    }
+    public void sortStudentsByScoreLowToHigh(){
+        List<Student> sortedList = new ArrayList<>(listStudent);
+        Collections.sort(sortedList, new Comparator<Student>() {
+            @Override
+            public int compare(Student student1, Student student2) {
+                if(student1.getPoint()<student2.getPoint()){
+                    return -1;
+                }
+                if(student1.getPoint()>student2.getPoint()){
+                    return 1;
+                }
+                else {
+                    return 0;
+                }
+            }
+        });
+        for(Student student : sortedList) {
+            System.out.println(student);
+        }
+    }
+    public boolean checkID(String id) {
+        for (Student student : listStudent) {
+            if (student.getId().equals(id)) {
+                return true; //
+            }
+        }
+        return false;
+    }
+}
