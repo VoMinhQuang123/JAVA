@@ -1,0 +1,92 @@
+public class Student {
+    private String id;
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+    //
+    //
+    //
+    private String name;
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    //
+    //
+    //
+    private int age;
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    //
+    //
+    //
+    private int gender;
+    public int getGender() {
+        return gender;
+    }
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+    //
+    //
+    //
+    private String address;
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        address = address;
+    }
+    //
+    //
+    //
+    private Float point;
+    public Float getPoint() {
+        return point;
+    }
+    public void setPoint(Float point) {
+        this.point = point;
+    }
+
+    public Student(String id, String name, int age, int gender, String address, float point) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.address = address;
+        this.point = point;
+    }
+    @Override
+    public String toString() {
+        return "Student{" +
+                " ID='" + id + '\'' +
+                ", Name='" + name + '\'' +
+                ", Age=" + age +
+                ", Gender=" + gender +
+                ", Address=" + address +
+                ", Point=" + point +
+                '}';
+    }
+    public Student(String id){
+        this.id = id;
+    }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return id.equals(student.id);
+    }
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+}
